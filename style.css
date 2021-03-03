@@ -1,0 +1,70 @@
+body {
+    
+    
+background-color: white
+    
+}
+
+
+table{
+
+    border: medium solid;
+    border-radius: 10px;  
+    
+}
+
+
+th{
+    
+padding: 10px;
+border-radius: 10px;
+border: thin solid;
+
+}
+
+.m {
+        
+    background-color: yellow;
+    text-align: center;
+    border-radius: 10px;
+    border: thin solid;
+    padding: 0px;
+    
+}
+
+.a {
+        
+    background-color: crimson;
+    text-align: center;
+    border-radius: 10px;
+    border: thin solid;
+    
+}
+
+.n {
+        
+    background-color: blue;
+    text-align: center;
+    border-radius: 10px;
+    border: thin solid;
+    
+}
+
+.h {
+        
+    background-color: green;
+    text-align: center;
+    border-radius: 10px;
+    border: thin solid;
+    
+}
+
+.r {
+        
+    background-color: transparent;
+    text-align: center;
+    border-radius: 10px;
+    border: thin solid;
+    
+}
+    
