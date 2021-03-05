@@ -1,70 +1,54 @@
 body {
-    
-    
-background-color: white
-    
+  background-color: rgb(255, 255, 255);
 }
 
-
-table{
-
-    border: medium solid;
-    border-radius: 10px;  
-    
+table {
+  border: medium solid;
+  border-radius: 10px;
+  width: 75%;
 }
 
-
-th{
-    
-padding: 10px;
-border-radius: 10px;
-border: thin solid;
-
+th {
+  padding: 10px;
+  border-radius: 10px;
+  border: thin solid;
+  width: 8%;
 }
 
 .m {
-        
-    background-color: yellow;
-    text-align: center;
-    border-radius: 10px;
-    border: thin solid;
-    padding: 0px;
-    
+  background-color: rgb(245, 245, 106);
+  text-align: center;
+  border-radius: 10px;
+  font-size: x-small;
 }
 
 .a {
-        
-    background-color: crimson;
-    text-align: center;
-    border-radius: 10px;
-    border: thin solid;
-    
+  background-color: rgb(221, 65, 96);
+  text-align: center;
+  border-radius: 10px;
+  font-size: x-small;
+  color: rgb(255, 255, 255);
 }
 
 .n {
-        
-    background-color: blue;
-    text-align: center;
-    border-radius: 10px;
-    border: thin solid;
-    
+  background-color: rgb(61, 61, 233);
+  text-align: center;
+  border-radius: 10px;
+  font-size: x-small;
+  color: rgb(255, 255, 255);
 }
 
 .h {
-        
-    background-color: green;
-    text-align: center;
-    border-radius: 10px;
-    border: thin solid;
-    
+  background-color: rgb(38, 189, 38);
+  text-align: center;
+  border-radius: 10px;
+  font-size: x-small;
+  color: rgb(255, 255, 255);
 }
 
 .r {
-        
-    background-color: transparent;
-    text-align: center;
-    border-radius: 10px;
-    border: thin solid;
-    
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 10px;
+  font-size: x-small;
 }
-    

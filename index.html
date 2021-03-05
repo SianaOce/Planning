@@ -1,17 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
     <title>T1</title>
-</head>
+  </head>
 
-<body>
+  <body>
+    <div>
+        <input type="month">
+        <input type="number" id="Equipe" name="Equipe" min="1" max="5" step="1" placeholder="Equipe" width="20%">
+        <input type="button" value="Gen Planning" onclick="gen_plan()" />
+    </div>
+    <div id="Planning">
+        <p></p>
+    </div>
+  </body>
 
-<input type="button" value="Gen Planning" onclick="gen_plan()">
-    
-</body>
-
-<script src="script.js"></script> 
-
+  <script src="script.js"></script>
 </html>
