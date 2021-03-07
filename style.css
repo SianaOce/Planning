@@ -3,13 +3,14 @@ body {
 }
 
 table {
-  border: medium solid;
+  border: none;
   border-radius: 10px;
   width: 75%;
 }
 
 th {
-  padding: 10px;
+  font-size: small;
+  padding: 2px;
   border-radius: 10px;
   border: thin solid;
   width: 8%;

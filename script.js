@@ -1,31 +1,35 @@
 var cycle = [
   "m", "m", "a", "a", "n", "r", "r", "r", "r",
-  "m", "m", "a", "n", "n", "r", "r", "r",
-  "h", "m", "a", "a", "n", "n", "r", "r", "r",
+  "m", "m", "a", "n", "n", "r", "r", "r", "h",
+  "m", "a", "a", "n", "n", "r", "r", "r",
+  "m", "m", "a", "a", "n", "n", "r", "r", "r",
+  "m", "m", "a", "a", "n", "r", "r", "r", "r",
+  "m", "m", "a", "n", "n", "r", "r", "r", "r", 
+  "m", "a", "a", "n", "n", "r", "r", "r",
   "m", "m", "a", "a", "n", "n", "r", "r", "r",
 ];
 
 var mois = [
-  "Jan",
-  "Fév",
+  "Janvier",
+  "Février",
   "Mars",
-  "Avr",
+  "Avril",
   "Mai",
   "Juin",
-  "Jui",
+  "Juillet",
   "Août",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Déc",
+  "Septembre",
+  "Octobre",
+  "Novembre",
+  "Décembre",
 ];
 
-var jour = ["L", "M", "M", "J", "V", "S", "D"];
+var jour = ["D", "L", "M", "M", "J", "V", "S"];
 
-let date_ref = new Date(Date.UTC(2018, 1, 11));
-
+let date_ref = new Date(Date.UTC(2018, 1, 26));
 
 function gen_plan() {
+
   var div = document.getElementById("Planning");
 
   var table = document.createElement("table");
@@ -45,17 +49,17 @@ function gen_plan() {
     row = document.createElement("tr");
 
     for (var k = 0; k < 12; k++) {
-      var date_g = new Date(Date.UTC(2021, k, j + 1));
-
+      var date_g = new Date(Date.UTC(2021, k, j+1 ));
+      
       var cell = document.createElement("td");
-
+        
       if (date_g.getDate() == j + 1) {
+        console.log(date_g, date_g.getDay())
         var cellText = document.createTextNode(
-          jour[date_g.getDay()] +" " + date_g.getDate()
+          jour[date_g.getDay()] + " " + date_g.getDate()
         );
         cell.appendChild(cellText);
-        var c = Math.round(((date_g - date_ref) / 1000 / 60 / 60 / 24) % 35);
-
+        var c = Math.round(((date_g - date_ref) / 1000 / 60 / 60 / 24) % 70);
         
         cell.className = cycle[c];
       }
