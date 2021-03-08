@@ -26,49 +26,67 @@ var mois = [
 
 var jour = ["D", "L", "M", "M", "J", "V", "S"];
 
-let date_ref = new Date(Date.UTC(2018, 1, 26));
+
+
+var table = document.getElementById("Plan");
+var bouton = document.getElementById("btn");
+
+document.getElementById("Date").addEventListener('change', (e) => {
+  y = e.target.value
+})
+
+document.getElementById("Equipe").addEventListener('change',(e) => {
+    eq = e.target.value
+})
 
 function gen_plan() {
+  
+  var an = new Date(y).getUTCFullYear()
+  
+  table.innerHTML= ""
 
-  var div = document.getElementById("Planning");
+  let tableBody = document.createElement("tbody"); 
+  
+  caption = document.createElement("caption");
+  caption.innerHTML="Eq " + eq + " - " + an
 
-  var table = document.createElement("table");
-  var tableBody = document.createElement("tbody");
+  table.appendChild(caption)
 
   row = document.createElement("tr");
 
-  for (var i = 0; i < 12; i++) {
-    var entete = document.createElement("th");
-    var enteteTexte = document.createTextNode(mois[i]);
-    entete.appendChild(enteteTexte);
-    row.appendChild(entete);
-    tableBody.appendChild(row);
-  }
-
-  for (var j = 0; j < 31; j++) {
-    row = document.createElement("tr");
-
-    for (var k = 0; k < 12; k++) {
-      var date_g = new Date(Date.UTC(2021, k, j+1 ));
-      
-      var cell = document.createElement("td");
-        
-      if (date_g.getDate() == j + 1) {
-        console.log(date_g, date_g.getDay())
-        var cellText = document.createTextNode(
-          jour[date_g.getDay()] + " " + date_g.getDate()
-        );
-        cell.appendChild(cellText);
-        var c = Math.round(((date_g - date_ref) / 1000 / 60 / 60 / 24) % 70);
-        
-        cell.className = cycle[c];
-      }
-      row.appendChild(cell);
+    for (var i = 0; i < 12; i++) {
+      var entete = document.createElement("th");
+      var enteteTexte = document.createTextNode(mois[i]);
+      entete.appendChild(enteteTexte);
+      row.appendChild(entete);
+      tableBody.appendChild(row);
     }
 
-    tableBody.appendChild(row);
-  }
+    for (var j = 0; j < 31; j++) {
+      row = document.createElement("tr");
 
-  table.appendChild(tableBody);
-  div.appendChild(table);
-}
+      for (var k = 0; k < 12; k++) {
+        var date_ref = new Date(Date.UTC(2018, 1, 12+7*eq));
+        var date_g = new Date(Date.UTC(an, k, j+1 ));
+
+        
+        var cell = document.createElement("td");
+          
+        if (date_g.getDate() == j + 1) {
+          var cellText = document.createTextNode(
+            jour[date_g.getDay()] + " " + date_g.getDate()
+          );
+          cell.appendChild(cellText);
+          var c = Math.round(((date_g - date_ref) / 1000 / 60 / 60 / 24) % 70);
+          
+          cell.className = cycle[c];
+        }
+        row.appendChild(cell);
+      }
+    
+      tableBody.appendChild(row);
+    }
+    
+    table.appendChild(tableBody);
+
+  }

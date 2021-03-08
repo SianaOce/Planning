@@ -3,17 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="style.css" />
-    <title>T1</title>
+    <title>Planning_O_5x8</title>
   </head>
 
   <body>
     <div>
-        <input type="month">
-        <input type="number" id="Equipe" name="Equipe" min="1" max="5" step="1" placeholder="Equipe" width="20%">
-        <input type="button" value="Gen Planning" onclick="gen_plan()" />
+        <input class="date "type="month" id="Date">
+        <input class="eq" type="number" id="Equipe" min="1" max="5" step="1" placeholder="Eq" required>
+        <input class="btn" type="button" value="Générer" id="btn" onclick="gen_plan()">
     </div>
-    <div id="Planning">
-        <p></p>
+    <div>
+        <table id="Plan"></table>
     </div>
   </body>
 

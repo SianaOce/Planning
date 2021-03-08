@@ -8,9 +8,16 @@ table {
   width: 75%;
 }
 
+caption {
+  font-size: xx-large;
+  text-align: center;
+  padding: 5px;
+  margin: 5px;
+}
+
 th {
   font-size: small;
-  padding: 2px;
+  padding: 5px;
   border-radius: 10px;
   border: thin solid;
   width: 8%;
@@ -52,4 +59,25 @@ th {
   text-align: center;
   border-radius: 10px;
   font-size: x-small;
+}
+
+.btn {
+  font-size: x-large;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.eq {
+  font-size: x-large;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.date {
+  font-size: x-large;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
 }
