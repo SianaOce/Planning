@@ -1,82 +1,83 @@
-body {
-  background-color: rgb(255, 255, 255);
-}
-
 table {
-  border: none;
+  border: thin;
+  border-color: rgb(27, 34, 41);
   border-radius: 10px;
-  width: 75%;
-}
-
-caption {
-  font-size: xx-large;
-  text-align: center;
+  border-style: solid;
   padding: 5px;
   margin: 5px;
+  float: left;
+  min-height: 600px;
+  min-width: 100px;
+}
+
+.titre {
+  font-size: xx-large;
+  margin: 10px;
+  text-align: center;
+  border: solid;
+  border-radius: 20px;
+  padding: 10px;
 }
 
 th {
   font-size: small;
-  padding: 5px;
-  border-radius: 10px;
-  border: thin solid;
-  width: 8%;
+  padding-bottom: 2px;
+  border-bottom: solid;
+}
+
+.m,
+.a,
+.n,
+.h,
+.r {
+  text-align: center;
+  font-size: x-small;
 }
 
 .m {
   background-color: rgb(245, 245, 106);
-  text-align: center;
   border-radius: 10px;
-  font-size: x-small;
 }
 
 .a {
   background-color: rgb(221, 65, 96);
-  text-align: center;
   border-radius: 10px;
-  font-size: x-small;
   color: rgb(255, 255, 255);
 }
 
 .n {
   background-color: rgb(61, 61, 233);
-  text-align: center;
   border-radius: 10px;
-  font-size: x-small;
   color: rgb(255, 255, 255);
 }
 
 .h {
   background-color: rgb(38, 189, 38);
-  text-align: center;
   border-radius: 10px;
-  font-size: x-small;
   color: rgb(255, 255, 255);
 }
 
 .r {
   background-color: rgb(255, 255, 255);
-  text-align: center;
   border-radius: 10px;
-  font-size: x-small;
 }
 
 .btn {
-  font-size: x-large;
+  font-size: large;
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
 }
 
 .eq {
-  font-size: x-large;
+  font-size: large;
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
 }
 
 .date {
-  font-size: x-large;
+  font-size: large;
   border-radius: 5px;
   padding: 5px;
   margin: 5px;

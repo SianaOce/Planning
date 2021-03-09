@@ -26,11 +26,6 @@ var mois = [
 
 var jour = ["D", "L", "M", "M", "J", "V", "S"];
 
-
-
-var table = document.getElementById("Plan");
-var bouton = document.getElementById("btn");
-
 document.getElementById("Date").addEventListener('change', (e) => {
   y = e.target.value
 })
@@ -40,53 +35,46 @@ document.getElementById("Equipe").addEventListener('change',(e) => {
 })
 
 function gen_plan() {
-  
+
+  document.getElementById("plan").innerHTML=""
+
   var an = new Date(y).getUTCFullYear()
   
-  table.innerHTML= ""
-
-  let tableBody = document.createElement("tbody"); 
-  
-  caption = document.createElement("caption");
-  caption.innerHTML="Eq " + eq + " - " + an
-
-  table.appendChild(caption)
-
-  row = document.createElement("tr");
+  document.getElementById("Titre").innerHTML="Eq " + eq + " - " + an
 
     for (var i = 0; i < 12; i++) {
+      var planning = document.createElement("table")
+      row = document.createElement("tr");
       var entete = document.createElement("th");
       var enteteTexte = document.createTextNode(mois[i]);
       entete.appendChild(enteteTexte);
       row.appendChild(entete);
-      tableBody.appendChild(row);
-    }
+      planning.appendChild(row);
 
-    for (var j = 0; j < 31; j++) {
-      row = document.createElement("tr");
-
-      for (var k = 0; k < 12; k++) {
-        var date_ref = new Date(Date.UTC(2018, 1, 12+7*eq));
-        var date_g = new Date(Date.UTC(an, k, j+1 ));
-
+      for (var j = 0; j < 31; j++) {
+        row = document.createElement("tr");
         
-        var cell = document.createElement("td");
+          var date_ref = new Date(Date.UTC(2018, 1, 12+7*eq));
+          var date_g = new Date(Date.UTC(an, i, j+1 ));
           
-        if (date_g.getDate() == j + 1) {
-          var cellText = document.createTextNode(
-            jour[date_g.getDay()] + " " + date_g.getDate()
-          );
-          cell.appendChild(cellText);
-          var c = Math.round(((date_g - date_ref) / 1000 / 60 / 60 / 24) % 70);
-          
-          cell.className = cycle[c];
-        }
-        row.appendChild(cell);
+          var cell = document.createElement("td");
+            
+          if (date_g.getDate() == j + 1) {
+            var cellText = document.createTextNode(
+              jour[date_g.getDay()] + " " + date_g.getDate()
+            );
+            cell.appendChild(cellText);
+            var c = Math.round(((date_g - date_ref) / 1000 / 60 / 60 / 24) % 70);
+            
+            cell.className = cycle[c];
+          }
+          row.appendChild(cell);
+
+        planning.appendChild(row);
       }
-    
-      tableBody.appendChild(row);
+
+      document.getElementById("plan").appendChild(planning)       
+      
     }
     
-    table.appendChild(tableBody);
-
   }

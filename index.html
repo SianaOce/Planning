@@ -8,13 +8,34 @@
 
   <body>
     <div>
-        <input class="date "type="month" id="Date">
-        <input class="eq" type="number" id="Equipe" min="1" max="5" step="1" placeholder="Eq" required>
-        <input class="btn" type="button" value="Générer" id="btn" onclick="gen_plan()">
+      <input class="date" type="month" id="Date" />
+      <input
+        class="eq"
+        type="number"
+        id="Equipe"
+        min="1"
+        max="5"
+        step="1"
+        placeholder="Eq"
+        required
+      />
+      <input
+        class="btn"
+        type="button"
+        value="Générer"
+        id="btn"
+        onclick="gen_plan()"
+      />
     </div>
-    <div>
-        <table id="Plan"></table>
+
+    <div id="Titre" class="titre">
+      <p></p>
     </div>
+      
+    <div id="plan">
+    </div>
+
+
   </body>
 
   <script src="script.js"></script>
