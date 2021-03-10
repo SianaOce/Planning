@@ -1,13 +1,35 @@
-table {
-  border: thin;
-  border-color: rgb(27, 34, 41);
-  border-radius: 10px;
-  border-style: solid;
+.bar_choice {
+  background: linear-gradient(
+    rgba(192, 189, 189, 0.1),
+    rgba(241, 255, 114, 0.1)
+  );
+  border-radius: 50px;
+  min-height: 70px;
+}
+
+.btn {
+  border: none;
+  background-color: #ffe600;
+  color: rgb(10, 10, 10);
+  font-size: large;
+  border-radius: 20px;
+  padding: 15px 30px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.date {
+  border: none;
+  font-size: large;
+  border-radius: 5px;
   padding: 5px;
   margin: 5px;
-  float: left;
-  min-height: 600px;
-  min-width: 100px;
+}
+
+select {
+  font-size: large;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .titre {
@@ -19,66 +41,65 @@ table {
   padding: 10px;
 }
 
+p {
+  font-size: large;
+}
+
+table {
+  border: thin;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border-style: solid;
+  padding: 5px;
+  margin: 5px;
+  float: left;
+  min-width: 100px;
+}
+
 th {
   font-size: small;
   padding-bottom: 2px;
   border-bottom: solid;
+  border-radius: 10px;
+  border-color: rgba(0, 0, 0, 0.25);
 }
 
 .m,
 .a,
 .n,
 .h,
-.r {
+.r,
+.v {
   text-align: center;
-  font-size: x-small;
+  font-size: 10px;
+  border-bottom-right-radius: 18px;
+  border-top-left-radius: 18px;
+  height: 18px;
 }
 
 .m {
   background-color: rgb(245, 245, 106);
-  border-radius: 10px;
 }
 
 .a {
   background-color: rgb(221, 65, 96);
-  border-radius: 10px;
   color: rgb(255, 255, 255);
 }
 
 .n {
   background-color: rgb(61, 61, 233);
-  border-radius: 10px;
   color: rgb(255, 255, 255);
 }
 
 .h {
   background-color: rgb(38, 189, 38);
-  border-radius: 10px;
   color: rgb(255, 255, 255);
 }
 
 .r {
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
+  background-color: rgb(247, 247, 247);
 }
 
-.btn {
-  font-size: large;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 5px;
-}
-
-.eq {
-  font-size: large;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 5px;
-}
-
-.date {
-  font-size: large;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 5px;
+.v {
+  background-color: white;
 }

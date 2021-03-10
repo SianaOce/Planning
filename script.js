@@ -26,20 +26,29 @@ var mois = [
 
 var jour = ["D", "L", "M", "M", "J", "V", "S"];
 
-document.getElementById("Date").addEventListener('change', (e) => {
-  y = e.target.value
-})
+var annee_select = document.querySelector("#annee")
 
-document.getElementById("Equipe").addEventListener('change',(e) => {
-    eq = e.target.value
-})
+  // On récupère l'année courante
+  var date = new Date();
+  var year = date.getFullYear();
+
+  // On ajoute l'année courante et les 100 années à venir
+  // dans l'élément <select> pour l'année
+  for(var i = 0; i <= 20; i++) {
+    var option = document.createElement('option');
+    option.textContent = year+i;
+    console.log(option)
+    annee_select.appendChild(option);
+  }
 
 function gen_plan() {
 
   document.getElementById("plan").innerHTML=""
 
-  var an = new Date(y).getUTCFullYear()
-  
+  const eq = document.querySelector('#equipe').value;
+  const an = document.querySelector('#annee').value;
+  const mois_c = document.querySelector('#mois').value;
+
   document.getElementById("Titre").innerHTML="Eq " + eq + " - " + an
 
     for (var i = 0; i < 12; i++) {
@@ -67,7 +76,9 @@ function gen_plan() {
             var c = Math.round(((date_g - date_ref) / 1000 / 60 / 60 / 24) % 70);
             
             cell.className = cycle[c];
-          }
+          } else{
+                   
+            cell.className = "v"}
           row.appendChild(cell);
 
         planning.appendChild(row);

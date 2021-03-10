@@ -1,42 +1,67 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Planning_O_5x8</title>
-  </head>
 
-  <body>
-    <div>
-      <input class="date" type="month" id="Date" />
-      <input
-        class="eq"
-        type="number"
-        id="Equipe"
-        min="1"
-        max="5"
-        step="1"
-        placeholder="Eq"
-        required
-      />
-      <input
-        class="btn"
-        type="button"
-        value="Générer"
-        id="btn"
-        onclick="gen_plan()"
-      />
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Planning_O_5x8</title>
+</head>
 
-    <div id="Titre" class="titre">
-      <p></p>
-    </div>
-      
-    <div id="plan">
-    </div>
+<body>
+  <div class="bar_choice">
+    <form>
+      <div class="mois_annee_eq">
+        <span>
+          <label for="mois">Mois :</label>
+          <select id="mois" name="mois">
+            <option value=0 selected>Janvier</option>
+            <option value=1>Février</option>
+            <option value=2>Mars</option>
+            <option value=3>Avril</option>
+            <option value=4>Mai</option>
+            <option value=5>Juin</option>
+            <option value=6>Juillet</option>
+            <option value=7>Août</option>
+            <option value=8>Septembre</option>
+            <option value=9>Octobre</option>
+            <option value=10>Novembre</option>
+            <option value=11>Décembre</option>
+          </select>
+        </span>
+        <span>
+          <label for="annee">Année :</label>
+          <select id="annee" name="annee">
+          </select>
+        </span>
+        <span>
+          <label for="equipe">Equipe :</label>
+          <select id="equipe">
+
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+
+          </select>
+
+        </span>
+    </form>
+  </div>
 
 
-  </body>
+  <input class="btn" type="button" value="Générer" id="btn" onclick="gen_plan()" />
 
-  <script src="script.js"></script>
+  </div>
+
+  <div id="Titre" class="titre">
+  </div>
+
+  <div id="plan">
+  </div>
+
+</body>
+
+<script src="script.js"></script>
+
 </html>
