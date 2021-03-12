@@ -84,8 +84,8 @@ function gen_plan() {
         planning.appendChild(row);
       }
 
-      document.getElementById("plan").appendChild(planning)       
-      
+        document.getElementById("plan").appendChild(planning)       
+
     }
     
   }

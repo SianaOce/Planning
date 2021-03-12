@@ -1,10 +1,16 @@
 .bar_choice {
   background: linear-gradient(
-    rgba(192, 189, 189, 0.1),
-    rgba(241, 255, 114, 0.1)
+    rgba(192, 189, 189, 0.2),
+    rgba(116, 185, 75, 0.2)
   );
   border-radius: 50px;
   min-height: 70px;
+}
+
+label {
+  font-size: large;
+  padding: 10px;
+  margin-left: 10px;
 }
 
 .btn {
@@ -56,6 +62,10 @@ table {
   min-width: 100px;
 }
 
+.trim {
+  width: 100%;
+}
+
 th {
   font-size: small;
   padding-bottom: 2px;
@@ -71,9 +81,11 @@ th {
 .r,
 .v {
   text-align: center;
-  font-size: 10px;
+  font-size: 12px;
   border-bottom-right-radius: 18px;
   border-top-left-radius: 18px;
+  padding: 4px;
+  min-width: 18px;
   height: 18px;
 }
 
@@ -102,4 +114,21 @@ th {
 
 .v {
   background-color: white;
+}
+
+@media screen and (max-width: 640px) {
+  table {
+    min-width: 150px;
+  }
+  .m,
+  .a,
+  .n,
+  .h,
+  .r,
+  .v {
+    font-size: 18px;
+  }
+  th {
+    font-size: 18px;
+  }
 }
