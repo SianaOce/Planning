@@ -7,14 +7,14 @@
 p {
   font-size: xx-small;
   float: right;
-  margin-right: 15px;
-  padding: 15px;
+  margin-right: 5px;
+  padding: 2px;
 }
 
 label {
   font-size: medium;
   padding: 2px;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 .btn {
@@ -23,8 +23,8 @@ label {
   color: rgb(10, 10, 10);
   font-size: medium;
   border-radius: 20px;
-  padding: 12px 15px;
-  margin: 10px;
+  padding: 10px 12px;
+  margin: 4px;
   cursor: pointer;
 }
 
