@@ -8,8 +8,8 @@
 }
 
 label {
-  font-size: large;
-  padding: 10px;
+  font-size: medium;
+  padding: 5px;
   margin-left: 10px;
 }
 
@@ -19,27 +19,19 @@ label {
   color: rgb(10, 10, 10);
   font-size: large;
   border-radius: 20px;
-  padding: 15px 30px;
-  margin: 5px;
+  padding: 15px 20px;
+  margin: 10px;
   cursor: pointer;
 }
 
-.date {
-  border: none;
-  font-size: large;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 5px;
-}
-
 select {
-  font-size: large;
+  font-size: medium;
   padding: 5px;
   border-radius: 5px;
 }
 
 .titre {
-  font-size: xx-large;
+  font-size: x-large;
   margin: 10px;
   text-align: center;
   border: solid;
@@ -59,7 +51,7 @@ table {
   padding: 5px;
   margin: 5px;
   float: left;
-  min-width: 100px;
+  min-width: 80px;
 }
 
 .trim {
@@ -81,12 +73,12 @@ th {
 .r,
 .v {
   text-align: center;
-  font-size: 12px;
+  font-size: small;
   border-bottom-right-radius: 18px;
   border-top-left-radius: 18px;
   padding: 4px;
   min-width: 18px;
-  height: 18px;
+  height: 16px;
 }
 
 .m {
@@ -114,21 +106,4 @@ th {
 
 .v {
   background-color: white;
-}
-
-@media all and (max-device-width: 480px) {
-  table {
-    min-width: 150px;
-  }
-  .m,
-  .a,
-  .n,
-  .h,
-  .r,
-  .v {
-    font-size: 18px;
-  }
-  th {
-    font-size: 18px;
-  }
 }
