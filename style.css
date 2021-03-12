@@ -13,7 +13,7 @@ p {
 
 label {
   font-size: medium;
-  padding: 5px;
+  padding: 2px;
   margin-left: 10px;
 }
 
@@ -29,9 +29,10 @@ label {
 }
 
 select {
-  font-size: medium;
-  padding: 5px;
-  border-radius: 5px;
+  font-size: small;
+  padding: 1px;
+  background-color: transparent;
+  border: none;
 }
 
 .titre {

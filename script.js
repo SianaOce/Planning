@@ -47,7 +47,7 @@ function gen_plan() {
 
   const eq = document.querySelector('#equipe').value;
   const an = document.querySelector('#annee').value;
-  const mois_c = document.querySelector('#mois').value;
+  /*const mois_c = document.querySelector('#mois').value;*/
 
   document.getElementById("Titre").innerHTML="Eq " + eq + " - " + an
   document.getElementById("Titre").className = "titre"
