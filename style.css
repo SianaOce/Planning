@@ -59,7 +59,7 @@ table {
   padding: 5px;
   margin: 5px;
   float: left;
-  min-width: 150px;
+  min-width: 100px;
 }
 
 .trim {
