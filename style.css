@@ -1,10 +1,14 @@
 .bar_choice {
-  background: linear-gradient(
-    rgba(192, 189, 189, 0.2),
-    rgba(116, 185, 75, 0.2)
-  );
-  border-radius: 50px;
-  min-height: 70px;
+  background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(74, 82, 201, 0.2));
+  border-radius: 30px;
+  min-height: 10px;
+}
+
+p {
+  font-size: xx-small;
+  float: right;
+  margin-right: 15px;
+  padding: 15px;
 }
 
 label {
@@ -17,9 +21,9 @@ label {
   border: none;
   background-color: #ffe600;
   color: rgb(10, 10, 10);
-  font-size: large;
+  font-size: medium;
   border-radius: 20px;
-  padding: 15px 20px;
+  padding: 12px 15px;
   margin: 10px;
   cursor: pointer;
 }
@@ -31,16 +35,13 @@ select {
 }
 
 .titre {
-  font-size: x-large;
+  font-size: xx-large;
   margin: 10px;
   text-align: center;
   border: solid;
   border-radius: 20px;
   padding: 10px;
-}
-
-p {
-  font-size: large;
+  background-color: rgba(241, 241, 241, 0.5);
 }
 
 table {
@@ -101,7 +102,7 @@ th {
 }
 
 .r {
-  background-color: rgb(247, 247, 247);
+  background-color: rgb(241, 241, 241, 0.5);
 }
 
 .v {

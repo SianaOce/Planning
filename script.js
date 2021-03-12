@@ -50,6 +50,7 @@ function gen_plan() {
   const mois_c = document.querySelector('#mois').value;
 
   document.getElementById("Titre").innerHTML="Eq " + eq + " - " + an
+  document.getElementById("Titre").className = "titre"
 
     for (var i = 0; i < 12; i++) {
       var planning = document.createElement("table")
