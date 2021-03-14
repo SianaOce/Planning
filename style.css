@@ -84,16 +84,16 @@ th {
 }
 
 .m {
-  background-color: rgb(247, 247, 12);
+  background-color: rgb(245, 245, 10);
 }
 
 .a {
-  background-color: rgb(247, 3, 52);
+  background-color: rgb(245, 10, 10);
   color: rgb(255, 255, 255);
 }
 
 .n {
-  background-color: rgb(3, 3, 247);
+  background-color: rgb(10, 10, 245);
   color: rgb(255, 255, 255);
 }
 
@@ -103,7 +103,7 @@ th {
 }
 
 .r {
-  background-color: rgb(241, 241, 241, 0.5);
+  background-color: rgb(241, 241, 241);
 }
 
 .v {
