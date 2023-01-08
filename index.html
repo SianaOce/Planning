@@ -1,75 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
+        <link href="style.css" rel="stylesheet">
+        <title>Planning 5x8</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width" />
-  <link rel="icon" type="image/png" href="SE.png" />
-  <link rel="stylesheet" href="style.css" />
-  <title>Planning_O_5x8</title>
-</head>
+    </head>
 
-<body>
-  <div class="bar_choice">
-    <form>
-      <div class="mois_annee_eq">
-        <!--<span>
-          <label for="mois">Mois :</label>
-          <select id="mois" name="mois">
-            <option value=0 selected>Janvier</option>
-            <option value=1>Février</option>
-            <option value=2>Mars</option>
-            <option value=3>Avril</option>
-            <option value=4>Mai</option>
-            <option value=5>Juin</option>
-            <option value=6>Juillet</option>
-            <option value=7>Août</option>
-            <option value=8>Septembre</option>
-            <option value=9>Octobre</option>
-            <option value=10>Novembre</option>
-            <option value=11>Décembre</option>
-          </select>
-        </span>
-      -->
-        <span>
-          <label for="annee">An:</label>
-          <select id="annee" name="annee">
-          </select>
-        </span>
-        <span>
-          <label for="equipe">Eq:</label>
-          <select id="equipe">
+    <body>
+         <nav>
+            <div class="bar_choice">
+                <div class="year">
+                    <button class="btn" type="button" id="btn_previous_year" onclick="year_moins()">◄</button>
+                    <p id="choice_year"></p>
+                    <button class="btn" type="button" id="btn_after_year" onclick="year_plus()">►</button>
+                </div>
+        
+                <div class="eq">
+                    <button class="btn" type="button" id="btn_previous_eq" onclick="eq_moins()">◄</button>
+                    <p id="choice_eq">2</p>
+                    <button class="btn" type="button" id="btn_after_eq" onclick="eq_plus()">►</button>
+                </div>
+            </div>  
+        </nav>   
 
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+        <main>
 
-          </select>
-
-        </span>
-
-        <input class="btn" type="button" value="Générer" id="btn" onclick="gen_plan()" />
-
-        <p><img src="SE.png" width=10 alt="SE"> 2021-SianaOce </p>
-    </form>
-
-  </div>
-
-  </div>
-
-  <div id="Titre">
-  </div>
-
-  <div id="plan" class="plan">
-  </div>
+            <div id="plan" class="plan">
+            </div>
+    
+        </main>
+    
+        <footer>
+            <section><p><img src="SE.png" width=30 alt="SE"></p></section>
+        </footer>
 
 
 
-</body>
+    <script src='script.js'></script>
+    </body>
 
-
-<script src="script.js"></script>
 
 </html>

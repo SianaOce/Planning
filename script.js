@@ -1,92 +1,201 @@
-var cycle = [
-  "m", "m", "a", "a", "n", "r", "r", "r", "r",
-  "m", "m", "a", "n", "n", "r", "r", "r", "h",
-  "m", "a", "a", "n", "n", "r", "r", "r",
-  "m", "m", "a", "a", "n", "n", "r", "r", "r",
-  "m", "m", "a", "a", "n", "r", "r", "r", "r",
-  "m", "m", "a", "n", "n", "r", "r", "r", "r", 
-  "m", "a", "a", "n", "n", "r", "r", "r",
-  "m", "m", "a", "a", "n", "n", "r", "r", "r",
+// SianaOce janv. 2023
+// Representation calendrier 5x8 Orano LH avec jours feries et vacances scolaires
+
+// Representation du cycle 5x8 sous forme de tableau
+const cycle = [
+    "m", "m", "a", "a", "n", "r", "r", "r", "r",
+    "m", "m", "a", "n", "n", "r", "r", "r", "h",
+    "m", "a", "a", "n", "n", "r", "r", "r",
+    "m", "m", "a", "a", "n", "n", "r", "r", "r",
+    "m", "m", "a", "a", "n", "r", "r", "r", "r",
+    "m", "m", "a", "n", "n", "r", "r", "r", "r", 
+    "m", "a", "a", "n", "n", "r", "r", "r",
+    "m", "m", "a", "a", "n", "n", "r", "r", "r",
 ];
 
-var mois = [
-  "Janvier",
-  "Février",
-  "Mars",
-  "Avril",
-  "Mai",
-  "Juin",
-  "Juillet",
-  "Août",
-  "Septembre",
-  "Octobre",
-  "Novembre",
-  "Décembre",
+// Tableau des mois en français
+const mois = [
+    "Janvier",
+    "Février",
+    "Mars",
+    "Avril",
+    "Mai",
+    "Juin",
+    "Juillet",
+    "Août",
+    "Septembre",
+    "Octobre",
+    "Novembre",
+    "Décembre",
 ];
 
-var jour = ["D", "L", "M", "M", "J", "V", "S"];
+// Tableau des entetes des jours de la semaine
+const jour = ["Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam.", "Dim."];
 
-var annee_select = document.querySelector("#annee")
+// URL pour recuperer des JSON des jours feries et des vacances scolaires
+let URL_joursferies = 'https://calendrier.api.gouv.fr/jours-feries/metropole.json';
+let URL_vacancesscolaires = 'https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-calendrier-scolaire&q=&rows=100&sort=end_date&facet=description&facet=population&facet=start_date&facet=end_date&facet=location&facet=zones&facet=annee_scolaire&refine.location=Caen&refine.location=Normandie&disjunctive.location=true';
 
-  // On récupère l'année courante
-  var date = new Date();
-  var year = date.getFullYear();
+let jours_feries = {}
+let vacances_scolaires = []
 
-  // On ajoute l'année courante et les 100 années à venir
-  // dans l'élément <select> pour l'année
-  for(var i = 0; i <= 20; i++) {
-    var option = document.createElement('option');
-    option.textContent = year+i;
-    console.log(option)
-    annee_select.appendChild(option);
+// Requetes pour recuperer en json les jours feries et les vacances scolaires
+fetch(URL_joursferies)
+    .then(r1 => r1.json())
+    .then(r2 => {
+        jours_feries = r2
+    })
+fetch(URL_vacancesscolaires)
+    .then(r3 => r3.json())
+    .then(r4 => { 
+        for (var e of r4.records) {
+                var dates = new Date(e.fields.start_date)
+                var enddate = new Date(e.fields.end_date)
+                do{
+                    vacances_scolaires.push(dates.getFullYear() + "-" + twoDigit(1+dates.getMonth()) + "-" + twoDigit(dates.getDate()))
+                    dates.setDate(dates.getDate()+1)
+                } while (enddate > dates)
+        }
+    })
+
+// Récupèration de l'année courante
+var date = new Date();
+var year = date.getFullYear();
+document.getElementById("choice_year").innerText = year;
+
+// Fonction pour mettre à jour le planning à l'année précedente
+function year_moins() {
+    var y = parseInt(document.getElementById("choice_year").innerText);
+    if (y > year-2) {document.getElementById("choice_year").innerText = y-1}
+    gen_plan()
   }
 
+// Fonction pour mettre à jour le planning à l'année suivante  
+function year_plus() {
+    var y = parseInt(document.getElementById("choice_year").innerText);
+    if (y < year+5) {
+      document.getElementById("choice_year").innerText = y+1
+    }
+    gen_plan()
+  }
+
+// Fonction pour mettre à jour le planning avec l'équipe precedente
+function eq_moins() {
+    var e = parseInt(document.getElementById("choice_eq").innerText);
+    if (e > 1) {
+      document.getElementById("choice_eq").innerText = e-1
+    }else{
+      document.getElementById("choice_eq").innerText = 5
+    }
+    gen_plan()
+  }
+
+// Fonction pour mettre à jour le planning avec l'équipe suivante
+function eq_plus() {
+    var e = parseInt(document.getElementById("choice_eq").innerText);
+    if (e < 5) {
+      document.getElementById("choice_eq").innerText = e+1
+    }else{
+      document.getElementById("choice_eq").innerText = 1
+    }
+    gen_plan()
+  }
+
+// Fonction pour transformer les jours et les mois en format XX (01,02,..)
+function twoDigit(number) {
+    var twodigit = number >= 10 ? number : "0" + number.toString();
+    return twodigit;
+}
+
+// Fonction pour generer le planning
 function gen_plan() {
 
-  document.getElementById("plan").innerHTML=""
+    // Efface les tableaux correspondant aux mois
+    document.getElementById("plan").innerHTML=""
 
-  const eq = document.querySelector('#equipe').value;
-  const an = document.querySelector('#annee').value;
-  /*const mois_c = document.querySelector('#mois').value;*/
+    // Recupere dans des constantes l'année et l'équipe choisie
+    const an = parseInt(document.getElementById("choice_year").innerText);
+    const eq = parseInt(document.getElementById("choice_eq").innerText);
 
-  document.getElementById("Titre").innerHTML="Eq " + eq + " - " + an
-  document.getElementById("Titre").className = "titre"
+    // Calcul la date de reference du cycle pour l'équipe choisie 
+    const date_ref = new Date(Date.UTC(2018, 1, 12+7*eq));
 
+    // Boucle creation des 12 tableaux mensuelles
     for (var i = 0; i < 12; i++) {
-      var planning = document.createElement("table")
-      row = document.createElement("tr");
-      var entete = document.createElement("th");
-      var enteteTexte = document.createTextNode(mois[i]);
-      entete.appendChild(enteteTexte);
-      row.appendChild(entete);
-      planning.appendChild(row);
-
-      for (var j = 0; j < 31; j++) {
+        // Creation du tableau
+        var planning = document.createElement("table")
+        // Nommage du tableau mois + année
         row = document.createElement("tr");
+        var entete = document.createElement("th");
+        var enteteTexte = document.createTextNode(mois[i] + " " + an);
+        entete.appendChild(enteteTexte);
+        entete.colSpan = 7;
         
-          var date_ref = new Date(Date.UTC(2018, 1, 12+7*eq));
-          var date_g = new Date(Date.UTC(an, i, j+1 ));
-          
-          var cell = document.createElement("td");
-            
-          if (date_g.getDate() == j + 1) {
-            var cellText = document.createTextNode(
-              jour[date_g.getDay()] + " " + date_g.getDate()
-            );
-            cell.appendChild(cellText);
-            var c = Math.round(((date_g - date_ref) / 1000 / 60 / 60 / 24) % 70);
-            
-            cell.className = cycle[c];
-          } else{
-                   
-            cell.className = "v"}
-          row.appendChild(cell);
-
+        row.appendChild(entete);
         planning.appendChild(row);
-      }
+        row = document.createElement("tr");
+        // Boucle de création des entetes des jours de la semaine
+        for (var x = 0; x < 7; x++){
+            var cell = document.createElement("td");
+            cell.className = "jour_semaine";
+            var cellText = document.createTextNode(jour[x]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+        }
+        planning.appendChild(row);
+        
+        var date_g = new Date(Date.UTC(an, i, 1));
+        var compteur_jour_semaine = 0
+        var jour_semaine_france
+        var jour_test_ferie = ""
+        row = document.createElement("tr");
 
-        document.getElementById("plan").appendChild(planning)       
+        // Boucle de creation des jours dans le mois
+        for (var j = 0; j < 42; j++) {
+            var cell = document.createElement("td");
+            
+            jour_semaine_france = date_g.getDay() - 1
+            if (jour_semaine_france == -1){
+                jour_semaine_france = 6
+            }
+            if (jour_semaine_france == compteur_jour_semaine && date_g.getMonth() == i) {
+                var cellText = document.createTextNode(date_g.getDate());
+                cell.appendChild(cellText);
+                // Verification du poste du jour (matin,AM,Nuit,HN,repos)
+                var c = Math.round(((date_g - date_ref) / 1000 / 60 / 60 / 24) % 70);
+                cell.className = cycle[c];
+                
+                //Verification si le jour est ferié
+                jour_test = date_g.getFullYear() + "-" + twoDigit(1+date_g.getMonth()) + "-" + (twoDigit(date_g.getDate()))
+                if(jour_test in jours_feries){
+                  cell.style.borderColor="Black"
+                }
+                // Verification si le jour fait partie des vacances scolaires
+                console.log(vacances_scolaires,jour_test)
+                if (vacances_scolaires.includes(jour_test)){
+                    cell.style.borderColor="Black"
+                }
+                
+                
+                date_g.setDate(date_g.getDate()+1)
 
-    }
-    
-  }
+            } else{
+                cell.className = "v"
+            }
+            
+            row.appendChild(cell);
+            compteur_jour_semaine++
+            if (compteur_jour_semaine == 7) {
+                compteur_jour_semaine = 0
+                planning.appendChild(row);
+                row = document.createElement("tr");
+            }
+        planning.appendChild(row);
+        }
+    document.getElementById("plan").appendChild(planning)         
+    }         
+}
+
+setTimeout(() => {
+    gen_plan()
+},"750")
