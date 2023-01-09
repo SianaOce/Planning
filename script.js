@@ -151,7 +151,7 @@ function gen_plan() {
         row = document.createElement("tr");
 
         // Boucle de creation des jours dans le mois
-        for (var j = 0; j < 42; j++) {
+        do {
             var cell = document.createElement("td");
             
             jour_semaine_france = date_g.getDay() - 1
@@ -165,18 +165,17 @@ function gen_plan() {
                 var c = Math.round(((date_g - date_ref) / 1000 / 60 / 60 / 24) % 70);
                 cell.className = cycle[c];
                 
-                //Verification si le jour est ferié
+                // Mise en format AAAA-MM-DD du jour à tester
                 jour_test = date_g.getFullYear() + "-" + twoDigit(1+date_g.getMonth()) + "-" + (twoDigit(date_g.getDate()))
+                //Verification si le jour est ferié
                 if(jour_test in jours_feries){
                   cell.style.borderColor="Black"
                 }
                 // Verification si le jour fait partie des vacances scolaires
-                console.log(vacances_scolaires,jour_test)
                 if (vacances_scolaires.includes(jour_test)){
                     cell.style.borderColor="Black"
                 }
-                
-                
+                                
                 date_g.setDate(date_g.getDate()+1)
 
             } else{
@@ -185,17 +184,18 @@ function gen_plan() {
             
             row.appendChild(cell);
             compteur_jour_semaine++
-            if (compteur_jour_semaine == 7) {
+            if (compteur_jour_semaine == 7 && date_g.getMonth() == i) {
                 compteur_jour_semaine = 0
                 planning.appendChild(row);
                 row = document.createElement("tr");
             }
         planning.appendChild(row);
-        }
+        }while (!(compteur_jour_semaine == 7 && date_g.getMonth() != i))
+
     document.getElementById("plan").appendChild(planning)         
     }         
 }
 
 setTimeout(() => {
     gen_plan()
-},"750")
+},"800")
