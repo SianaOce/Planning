@@ -151,7 +151,7 @@ function gen_plan() {
         row = document.createElement("tr");
 
         // Boucle de creation des jours dans le mois
-        do {
+        for (var j = 0; j < 42; j++) {
             var cell = document.createElement("td");
             
             jour_semaine_france = date_g.getDay() - 1
@@ -184,13 +184,13 @@ function gen_plan() {
             
             row.appendChild(cell);
             compteur_jour_semaine++
-            if (compteur_jour_semaine == 7 && date_g.getMonth() == i) {
+            if (compteur_jour_semaine == 7) {
                 compteur_jour_semaine = 0
                 planning.appendChild(row);
                 row = document.createElement("tr");
             }
         planning.appendChild(row);
-        }while (!(compteur_jour_semaine == 7 && date_g.getMonth() != i))
+        }
 
     document.getElementById("plan").appendChild(planning)         
     }         
