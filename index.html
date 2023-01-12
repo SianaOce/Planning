@@ -5,28 +5,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
         <link href="style.css" rel="stylesheet">
         <title>Planning 5x8</title>
-
     </head>
 
     <body>
          <nav>
-            <div class="bar_choice">
-                <div class="year">
-                    <button class="btn" type="button" id="btn_previous_year" onclick="year_moins()">◄</button>
-                    <p id="choice_year"></p>
-                    <button class="btn" type="button" id="btn_after_year" onclick="year_plus()">►</button>
-                </div>
+            <div class="year">
+                <div class="btn" type="button" id="btn_previous_year" onclick="year_moins()">&#8249-</div>
+                <div class="text_choice" id="choice_year"></div>
+                <div class="btn" type="button" id="btn_after_year" onclick="year_plus()">-&#8250</div>
+            </div>
         
-                <div class="eq">
-                    <button class="btn" type="button" id="btn_previous_eq" onclick="eq_moins()">◄</button>
-                    <p id="choice_eq">2</p>
-                    <button class="btn" type="button" id="btn_after_eq" onclick="eq_plus()">►</button>
-                </div>
-            </div>  
-        </nav>   
+            <div class="eq">
+                <div class="btn" type="button" id="btn_previous_eq" onclick="eq_moins()">&#8249-</div>
+                <div class="text_choice" id="choice_eq"></div>
+                <div class="btn" type="button" id="btn_after_eq" onclick="eq_plus()">-&#8250</div>
+            </div>
+       </nav>   
 
         <main>
 
@@ -39,10 +36,7 @@
             <section><p><img src="SE.png" width=30 alt="SE"></p></section>
         </footer>
 
-
-
     <script src='script.js'></script>
     </body>
-
 
 </html>

@@ -1,40 +1,39 @@
-.bar_choice {
-    border-radius: 8px;
-    font-family: Helvetica, sans-serif;
-    font-size: xx-large;
-    margin-bottom: 10px;
+body{
+    font-family: 'Caveat', cursive;
 }
 
 .year {
-    background: linear-gradient(to right, #f5f7fa, #f0f6ff);
-    border-radius: 8px;
-    display:flex;
-    flex: auto;
-    justify-content: space-between;
-}
-  
-.eq{
-    background: linear-gradient(to right, #f5f7fa, #f0f6ff);
+    background: linear-gradient(to right, #ebfae7, #d7f0eb);
     border-radius: 8px;
     display:flex;
     flex:auto;
     justify-content: space-between;
+    font-size: 48px;
+    color: rgb(80, 14, 14);
+    user-select: none;
+}
+
+.eq{
+    background: linear-gradient(to right, #ebfae7, #d7f0eb);
+    border-radius: 8px;
+    display:flex;
+    flex:auto;
+    justify-content: space-between;
+    font-size: 48px;
+    color: rgb(80, 14, 14);
+    user-select: none;
 }
 
 .btn {
-    background: linear-gradient(to right, #462eff, #3a26d4, #231780);
-    margin: 4px;
-    padding: 10px 10px;
-    border:0px;
-    border-radius: 5px;
-    text-align: center;
-    font-size: large;
-    color: rgb(255, 255, 255);            
+    margin-inline: 20px;
 }
-  
-.btn:hover {
-    background: #3d2cbdd2;
-    color: rgb(255, 255, 255,0.5);
+
+.btn:hover{
+    cursor: pointer;
+}
+
+.btn:active{
+    color: #b6e2ca;
 }
 
 .plan{
@@ -43,26 +42,32 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 5px;
-
 }
  
 table {
     border-spacing: 6px;
     padding: 10px;
+    align-content: center;
+    user-select: none;
 }
 
 th {
     column-span: all;
-    font-family:Helvetica, sans-serif;
-    font-size: 1.5em;
+    height: 1.8em;
+    font-size: 1.8em;
+    color: rgb(80, 14, 14);
     border-radius: 5px;
-    background: linear-gradient(to right, #f5f7fa, #f0f6ff);
+    background: linear-gradient(to right, #ebfae7, #d7f0eb);
     padding: 0.25em;
 }
-  
+
+.foot{
+    min-height: min-content;
+    column-span: all;
+}
+
 .jour_semaine {
-    font-family:Helvetica, sans-serif;
-    font-size: 1em;
+    font-size: 1.4em;
     text-align: center;
     height: 2em;
     border-bottom: solid black 1px;
@@ -75,8 +80,7 @@ th {
 .r,
 .v {
     text-align: center;
-    font-family:Helvetica, sans-serif;
-    font-size: 1.2em;
+    font-size: 1.4em;
     border-radius: 4px 4px 4px 8px;
     width: 2em;
     height: 2em;
@@ -114,4 +118,4 @@ footer{
     display:flex;
     justify-content:center;
 }
-  
+
