@@ -128,7 +128,7 @@ function gen_plan() {
   const eq = parseInt(document.getElementById("choice_eq").innerText);
 
   // Calcul la date de reference du cycle pour l'équipe choisie 
-  const date_ref = new Date(Date.UTC(2018, 1, 12+7*eq));
+  const date_ref = new Date(Date.UTC(2018, 1, 12+42*eq));
 
   // Boucle creation des 12 tableaux mensuelles
   for (var i = 0; i < 12; i++) {
