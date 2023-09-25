@@ -2,26 +2,16 @@ body{
     font-family: 'Caveat', cursive;
 }
 
-.year {
-    background: linear-gradient(to right, #ebfae7, #d7f0eb);
-    border-radius: 8px;
+.year,.eq,.tps {
+    background: linear-gradient(to right, #d2f5da, #b7e4db);
+    border-radius: 12px;
     display:flex;
     flex:auto;
     justify-content: space-between;
-    font-size: 48px;
+    font-size: 40px;
     color: rgb(80, 14, 14);
     user-select: none;
-}
-
-.eq{
-    background: linear-gradient(to right, #ebfae7, #d7f0eb);
-    border-radius: 8px;
-    display:flex;
-    flex:auto;
-    justify-content: space-between;
-    font-size: 48px;
-    color: rgb(80, 14, 14);
-    user-select: none;
+    margin: 1px;
 }
 
 .btn {
@@ -45,10 +35,13 @@ body{
 }
  
 table {
-    border-spacing: 6px;
-    padding: 10px;
+    border-spacing: 2px;
+    margin: 5px;
+    padding: 5px;
     align-content: center;
     user-select: none;
+    border: 1px solid rgba(170, 202, 160, 0.5);
+    border-radius: 5px;
 }
 
 th {
@@ -70,7 +63,7 @@ th {
     font-size: 1.4em;
     text-align: center;
     height: 2em;
-    border-bottom: solid black 1px;
+    
 }
 
 .m,
@@ -119,3 +112,6 @@ footer{
     justify-content:center;
 }
 
+.apropos{
+    text-align: center;
+}

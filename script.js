@@ -1,8 +1,8 @@
 // SianaOce janv. 2023
 // Representation calendrier 5x8 Orano LH avec jours feries et vacances scolaires
 
-// Representation du cycle 5x8 sous forme de tableau
-const cycle = [
+// Representation des cycles 5x8 sous forme de tableau
+const cycle_100 = [
   "m", "m", "a", "a", "n", "r", "r", "r", "r",
   "m", "m", "a", "n", "n", "r", "r", "r", "h",
   "m", "a", "a", "n", "n", "r", "r", "r",
@@ -11,6 +11,39 @@ const cycle = [
   "m", "m", "a", "n", "n", "r", "r", "r", "r", 
   "m", "a", "a", "n", "n", "r", "r", "r",
   "m", "m", "a", "a", "n", "n", "r", "r", "r",
+];
+const cycle_801 = [
+  "m", "m", "r", "a", "n", "r", "r", "r", "r",
+  "r", "m", "a", "n", "n", "r", "r", "r", "h",
+  "m", "a", "r", "n", "n", "r", "r", "r",
+  "m", "m", "a", "a", "r", "n", "r", "r", "r",
+  "m", "m", "a", "a", "r", "r", "r", "r", "r",
+  "m", "m", "a", "n", "n", "r", "r", "r", "r", 
+  "m", "r", "a", "n", "n", "r", "r", "r",
+  "m", "r", "a", "a", "n", "n", "r", "r", "r",
+];
+
+const cycle_802 = [
+  "r", "m", "a", "a", "n", "r", "r", "r", "r",
+  "m", "m", "a", "n", "r", "r", "r", "r", "h",
+  "m", "a", "r", "n", "n", "r", "r", "r",
+  "m", "m", "a", "a", "n", "r", "r", "r", "r",
+  "m", "m", "a", "r", "n", "r", "r", "r", "r",
+  "m", "m", "a", "n", "n", "r", "r", "r", "r", 
+  "r", "a", "a", "n", "n", "r", "r", "r",
+  "r", "m", "a", "a", "n", "n", "r", "r", "r",
+];
+
+// Regroupement des 3 cycles dans un tableau
+const cycle = [
+  cycle_100,
+  cycle_801,
+  cycle_802,
+];
+
+// Tableau de choix du temps de travail
+const Tps = [
+  "100%","80% n°1","80% n°2",
 ];
 
 // Tableau des mois en français
@@ -68,8 +101,18 @@ if (localStorage.getItem("eq_num") != null) {
   document.getElementById("choice_eq").innerText = localStorage.getItem("eq_num")
 }
 else{
-  document.getElementById("choice_eq").innerText = 2
+  document.getElementById("choice_eq").innerText = "éq 2"
 }
+
+var t = new Number
+// Recupere l'horaire de travail dans le stockage local navigateur si elle existe sinon mettre 100% par defaut
+if (localStorage.getItem("tps") != null) {
+  t = parseInt(localStorage.getItem("tps"))
+}
+else{
+  t = 0
+}
+
 
 // Fonction pour mettre à jour le planning à l'année précedente
 function year_moins() {
@@ -89,11 +132,11 @@ function year_plus() {
 
 // Fonction pour mettre à jour le planning avec l'équipe precedente
 function eq_moins() {
-  var e = parseInt(document.getElementById("choice_eq").innerText);
+  var e = parseInt(document.getElementById("choice_eq").innerText.charAt(3));
   if (e > 1) {
-    document.getElementById("choice_eq").innerText = e-1
+    document.getElementById("choice_eq").innerText = "éq " + (e-1)
   }else{
-    document.getElementById("choice_eq").innerText = 5
+    document.getElementById("choice_eq").innerText = "éq " + 5
   }
   localStorage.setItem("eq_num",document.getElementById("choice_eq").innerText)
   gen_plan()
@@ -101,13 +144,33 @@ function eq_moins() {
 
 // Fonction pour mettre à jour le planning avec l'équipe suivante
 function eq_plus() {
-  var e = parseInt(document.getElementById("choice_eq").innerText);
+  var e = parseInt(document.getElementById("choice_eq").innerText.charAt(3));
   if (e < 5) {
-    document.getElementById("choice_eq").innerText = e+1
+    document.getElementById("choice_eq").innerText = "éq " + (e+1)
   }else{
-    document.getElementById("choice_eq").innerText = 1
+    document.getElementById("choice_eq").innerText = "éq " + 1
   }
   localStorage.setItem("eq_num",document.getElementById("choice_eq").innerText)
+  gen_plan()
+}
+
+// Fonction pour mettre à jour le planning avec l'horaire de travail precedent
+function tps_moins() {
+  if (t > 0) {
+    t=t-1
+  }else{
+    t=2
+  }
+  gen_plan()
+}
+
+// Fonction pour mettre à jour le planning avec l'horaire de travail suivant
+function tps_plus() {
+  if (t < 2) {
+    t=t+1
+  }else{
+    t=0
+  }
   gen_plan()
 }
 
@@ -123,9 +186,13 @@ function gen_plan() {
   // Efface les tableaux correspondant aux mois
   document.getElementById("plan").innerHTML=""
 
+  // Met à jour l'affichage et stocke en local le "planning temps de travail" choisi
+  document.getElementById("choice_tps").innerText = Tps[t]
+  localStorage.setItem("tps",t)
+
   // Recupere dans des constantes l'année et l'équipe choisie
   const an = parseInt(document.getElementById("choice_year").innerText);
-  const eq = parseInt(document.getElementById("choice_eq").innerText);
+  const eq = parseInt(document.getElementById("choice_eq").innerText.charAt(3));
 
   // Calcul la date de reference du cycle pour l'équipe choisie 
   const date_ref = new Date(Date.UTC(2018, 0, 8+42*eq));
@@ -172,7 +239,7 @@ function gen_plan() {
               cell.appendChild(cellText);
               // Verification du poste du jour (matin,AM,Nuit,HN,repos)
               var c = Math.round(((date_g - date_ref) / 1000 / 60 / 60 / 24) % 70);
-              cell.className = cycle[c];
+              cell.className = cycle[t][c];
               
               // Mise en format AAAA-MM-DD du jour à tester
               jour_test = date_g.getFullYear() + "-" + twoDigit(1+date_g.getMonth()) + "-" + (twoDigit(date_g.getDate()))
@@ -211,6 +278,18 @@ function gen_plan() {
   document.getElementById("plan").appendChild(planning)         
   }         
 }
+
+function a_propos(){
+  if (document.getElementById("apropos").hidden){
+    document.getElementById("apropos").hidden = false
+  }
+  else {
+    document.getElementById("apropos").hidden = true
+  }
+ 
+
+}
+
 
 setTimeout(() => {
   gen_plan()

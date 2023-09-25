@@ -23,6 +23,13 @@
                 <div class="text_choice" id="choice_eq"></div>
                 <div class="btn" type="button" id="btn_after_eq" onclick="eq_plus()">-&#8250</div>
             </div>
+
+            <div class="tps">
+                <div class="btn" type="button" id="btn_previous_tps" onclick="tps_moins()">&#8249-</div>
+                <div class="text_choice" id="choice_tps"></div>
+                <div class="btn" type="button" id="btn_after_tps" onclick="tps_plus()">-&#8250</div>
+            </div>
+
        </nav>   
 
         <main>
@@ -33,7 +40,14 @@
         </main>
     
         <footer>
-            <section><p><img src="SE.png" width=30 alt="SE"></p></section>
+            <section>
+                <p class="apropos" onclick="a_propos()"><img src="SE.png" width=40 alt="SE"></p>
+                <p class="apropos" id="apropos" hidden="True">
+                    Planning 5x8_5R Orano LH<br>
+                    Mars 2021<br>
+                    Sébastien Egret</p>
+            </section>
+        
         </footer>
 
     <script src='script.js'></script>
