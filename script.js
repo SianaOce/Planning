@@ -3,35 +3,50 @@
 
 // Representation des cycles 5x8 sous forme de tableau
 const cycle_100 = [
-  "m", "m", "a", "a", "n", "r", "r", "r", "r",
-  "m", "m", "a", "n", "n", "r", "r", "r", "h",
-  "m", "a", "a", "n", "n", "r", "r", "r",
-  "m", "m", "a", "a", "n", "n", "r", "r", "r",
-  "m", "m", "a", "a", "n", "r", "r", "r", "r",
-  "m", "m", "a", "n", "n", "r", "r", "r", "r", 
-  "m", "a", "a", "n", "n", "r", "r", "r",
-  "m", "m", "a", "a", "n", "n", "r", "r", "r",
+  "m", "m", "a", "a", "n", "r", "r",
+  "r", "r", "m", "m", "a", "n", "n",
+  "r", "r", "r", "r", "m", "a", "a",
+  "n", "n", "r", "r", "r", "m", "m",
+  "a", "a", "n", "n", "r", "r", "r",
+  "m", "m", "a", "a", "n", "r", "r",
+  "r", "r", "m", "m", "a", "n", "n",
+  "r", "r", "r", "h", "m", "a", "a",
+  "n", "n", "r", "r", "r", "m", "m",
+  "a", "a", "n", "n", "r", "r", "r",
 ];
 const cycle_801 = [
-  "m", "m", "r", "a", "n", "r", "r", "r", "r",
-  "r", "m", "a", "n", "n", "r", "r", "r", "h",
-  "m", "a", "r", "n", "n", "r", "r", "r",
-  "m", "m", "a", "a", "r", "n", "r", "r", "r",
-  "m", "m", "a", "a", "r", "r", "r", "r", "r",
-  "m", "m", "a", "n", "n", "r", "r", "r", "r", 
-  "m", "r", "a", "n", "n", "r", "r", "r",
-  "m", "r", "a", "a", "n", "n", "r", "r", "r",
+  "m", "m", "r", "a", "n", "r", "r",
+  "r", "r", "r", "m", "a", "n", "n",
+  "r", "r", "r", "h", "m", "a", "r",
+  "n", "n", "r", "r", "r", "m", "m",
+  "a", "a", "r", "n", "r", "r", "r",
+  "m", "m", "a", "a", "r", "r", "r",
+  "r", "r", "m", "m", "a", "n", "n",
+  "r", "r", "r", "r", "m", "r", "a",
+  "n", "n", "r", "r", "r", "m", "r",
+  "a", "a", "n", "n", "r", "r", "r",
 ];
 
 const cycle_802 = [
-  "r", "m", "a", "a", "n", "r", "r", "r", "r",
-  "m", "m", "a", "n", "r", "r", "r", "r", "h",
-  "m", "a", "r", "n", "n", "r", "r", "r",
-  "m", "m", "a", "a", "n", "r", "r", "r", "r",
-  "m", "m", "a", "r", "n", "r", "r", "r", "r",
-  "m", "m", "a", "n", "n", "r", "r", "r", "r", 
-  "r", "a", "a", "n", "n", "r", "r", "r",
-  "r", "m", "a", "a", "n", "n", "r", "r", "r",
+  "r", "m", "a", "a", "n", "r", "r", 
+  "r", "r", "m", "m", "a", "n", "r", 
+  "r", "r", "r", "h", "m", "a", "r", 
+  "n", "n", "r", "r", "r", "m", "m",
+  "a", "a", "n", "r", "r", "r", "r",
+  "m", "m", "a", "r", "n", "r", "r",
+  "r", "r", "m", "m", "a", "n", "n",
+  "r", "r", "r", "r", "r", "a", "a", 
+  "n", "n", "r", "r", "r", "r", "m", 
+  "a", "a", "n", "n", "r", "r", "r",
+];
+
+// Regroupement de 5 dates de reference pour chaque équipe dans un tableau
+const dates_ref = [ 
+  new Date(Date.UTC(2022,8,26)),
+  new Date(Date.UTC(2022,10,7)),
+  new Date(Date.UTC(2022,9,10)),
+  new Date(Date.UTC(2022,10,21)),
+  new Date(Date.UTC(2022,9,24)),
 ];
 
 // Regroupement des 3 cycles dans un tableau
@@ -113,7 +128,6 @@ else{
   t = 0
 }
 
-
 // Fonction pour mettre à jour le planning à l'année précedente
 function year_moins() {
   var y = parseInt(document.getElementById("choice_year").innerText);
@@ -194,8 +208,9 @@ function gen_plan() {
   const an = parseInt(document.getElementById("choice_year").innerText);
   const eq = parseInt(document.getElementById("choice_eq").innerText.charAt(3));
 
-  // Calcul la date de reference du cycle pour l'équipe choisie 
-  const date_ref = new Date(Date.UTC(2018, 1, 12+42*eq));
+  // Récuperation de la date de reference du cycle pour l'équipe choisie 
+  const date_ref = dates_ref[eq-1];
+ 
 
   // Boucle creation des 12 tableaux mensuelles
   for (var i = 0; i < 12; i++) {
