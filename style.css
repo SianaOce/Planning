@@ -1,5 +1,13 @@
+@font-face {
+    font-family: 'Caveat-Medium';
+    src: url('/fonts/Caveat-Medium.ttf')
+}
+
 body{
-    font-family: 'Caveat', cursive;
+    font-family: 'Caveat-Medium',cursive;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
 }
 
 .year,.eq,.tps {
@@ -91,7 +99,7 @@ th {
 }
   
 .n {
-    background: #2F81F6;
+    background: #1772f5;
     color: rgb(255, 255, 255);
 }
   

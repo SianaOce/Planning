@@ -1,7 +1,7 @@
 // SianaOce janv. 2023
-// Representation calendrier 5x8 Orano LH avec jours feries et vacances scolaires
+// Représentation calendrier 5x8 Orano LH avec jours fériés et vacances scolaires
 
-// Representation des cycles 5x8 sous forme de tableau
+// Représentation des cycles 5x8 sous forme de tableau 100% - 80% n°1 - 80% n°2
 const cycle_100 = [
   "m", "m", "a", "a", "n", "r", "r",
   "r", "r", "m", "m", "a", "n", "n",
@@ -40,7 +40,7 @@ const cycle_802 = [
   "a", "a", "n", "n", "r", "r", "r",
 ];
 
-// Regroupement de 5 dates de reference pour chaque équipe dans un tableau
+// Regroupement de 5 dates de référence pour chaque équipe dans un tableau
 const dates_ref = [ 
   new Date(Date.UTC(2022,8,26)),
   new Date(Date.UTC(2022,10,7)),
@@ -77,41 +77,44 @@ const mois = [
   "Décembre",
 ];
 
-// Tableau des entetes des jours de la semaine
+// Tableau des entêtes des jours de la semaine
 const jour = ["Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam.", "Dim."];
 
-// URL pour recuperer des JSON des jours feries et des vacances scolaires
+// URL pour récupérer au format JSON des jours fériés et des vacances scolaires
 let URL_joursferies = 'https://calendrier.api.gouv.fr/jours-feries/metropole.json';
-let URL_vacancesscolaires = 'https://data.education.gouv.fr/api/records/1.0/search/?dataset=fr-en-calendrier-scolaire&q=&rows=100&sort=end_date&facet=description&facet=population&facet=start_date&facet=end_date&facet=location&facet=zones&facet=annee_scolaire&refine.location=Caen&refine.location=Normandie&disjunctive.location=true';
+let URL_vacances = 'https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-calendrier-scolaire/records?limit=100&refine=location%3A%22Normandie%22'
 
 let jours_feries = {}
 let vacances_scolaires = []
 
-// Requetes pour recuperer en json les jours feries et les vacances scolaires
+// Requêtes pour récupérer en JSON les jours fériés et les vacances scolaires
 fetch(URL_joursferies)
   .then(r1 => r1.json())
   .then(r2 => {
       jours_feries = r2
+      gen_plan()
   })
-fetch(URL_vacancesscolaires)
+
+fetch(URL_vacances)
   .then(r3 => r3.json())
   .then(r4 => { 
-      for (var e of r4.records) {
-              var dates = new Date(e.fields.start_date)
-              var enddate = new Date(e.fields.end_date)
+      for (let e of r4.results) {
+              let dates = new Date(e.start_date)
+              let enddate = new Date(e.end_date)
               do{
                   vacances_scolaires.push(dates.getFullYear() + "-" + twoDigit(1+dates.getMonth()) + "-" + twoDigit(dates.getDate()))
                   dates.setDate(dates.getDate()+1)
               } while (enddate > dates)
       }
+      gen_plan()
   })
 
-// Récupèration de l'année courante
-var date = new Date();
-var year = date.getFullYear();
-document.getElementById("choice_year").innerText = year;
+// Récupération de l'année courante
+const date = new Date();
+const year = date.getFullYear();
+document.getElementById("choice_year").innerText = year.toString();
 
-// Recupere l'équipe dans le stockage local navigateur si elle existe sinon mettre 2 par defaut
+// Récupération du n° d'équipe dans le stockage local navigateur si elle existe sinon mettre 2 par défaut
 if (localStorage.getItem("eq_num") != null) {
   document.getElementById("choice_eq").innerText = localStorage.getItem("eq_num")
 }
@@ -119,8 +122,8 @@ else{
   document.getElementById("choice_eq").innerText = "éq 2"
 }
 
-var t = new Number
-// Recupere l'horaire de travail dans le stockage local navigateur si elle existe sinon mettre 100% par defaut
+let t = Number
+// Récupération de l'horaire de travail dans le stockage local navigateur si elle existe sinon mettre 100% par défaut
 if (localStorage.getItem("tps") != null) {
   t = parseInt(localStorage.getItem("tps"))
 }
@@ -128,25 +131,25 @@ else{
   t = 0
 }
 
-// Fonction pour mettre à jour le planning à l'année précedente
+// Fonction pour mettre à jour le planning à l'année précédente
 function year_moins() {
-  var y = parseInt(document.getElementById("choice_year").innerText);
-  if (y > year-2) {document.getElementById("choice_year").innerText = y-1}
+  let y = parseInt(document.getElementById("choice_year").innerText);
+  if (y > year-2) {document.getElementById("choice_year").innerText = (y-1).toString()}
   gen_plan()
 }
 
 // Fonction pour mettre à jour le planning à l'année suivante  
 function year_plus() {
-  var y = parseInt(document.getElementById("choice_year").innerText);
+  let y = parseInt(document.getElementById("choice_year").innerText);
   if (y < year+5) {
-    document.getElementById("choice_year").innerText = y+1
+    document.getElementById("choice_year").innerText = (y+1).toString()
   }
   gen_plan()
 }
 
-// Fonction pour mettre à jour le planning avec l'équipe precedente
+// Fonction pour mettre à jour le planning avec l'équipe précédente
 function eq_moins() {
-  var e = parseInt(document.getElementById("choice_eq").innerText.charAt(3));
+  let e = parseInt(document.getElementById("choice_eq").innerText.charAt(3));
   if (e > 1) {
     document.getElementById("choice_eq").innerText = "éq " + (e-1)
   }else{
@@ -158,7 +161,7 @@ function eq_moins() {
 
 // Fonction pour mettre à jour le planning avec l'équipe suivante
 function eq_plus() {
-  var e = parseInt(document.getElementById("choice_eq").innerText.charAt(3));
+  let e = parseInt(document.getElementById("choice_eq").innerText.charAt(3));
   if (e < 5) {
     document.getElementById("choice_eq").innerText = "éq " + (e+1)
   }else{
@@ -168,7 +171,7 @@ function eq_plus() {
   gen_plan()
 }
 
-// Fonction pour mettre à jour le planning avec l'horaire de travail precedent
+// Fonction pour mettre à jour le planning avec l'horaire de travail précédent
 function tps_moins() {
   if (t > 0) {
     t=t-1
@@ -190,11 +193,10 @@ function tps_plus() {
 
 // Fonction pour transformer les jours et les mois en format XX (01,02,..)
 function twoDigit(number) {
-  var twodigit = number >= 10 ? number : "0" + number.toString();
-  return twodigit;
+    return number >= 10 ? number : "0" + number.toString();
 }
 
-// Fonction pour generer le planning
+// Fonction pour générer le planning
 function gen_plan() {
 
   // Efface les tableaux correspondant aux mois
@@ -204,88 +206,93 @@ function gen_plan() {
   document.getElementById("choice_tps").innerText = Tps[t]
   localStorage.setItem("tps",t)
 
-  // Recupere dans des constantes l'année et l'équipe choisie
+  // Récupération dans des constantes de l'année et du n° de l'équipe choisie
   const an = parseInt(document.getElementById("choice_year").innerText);
   const eq = parseInt(document.getElementById("choice_eq").innerText.charAt(3));
 
-  // Récuperation de la date de reference du cycle pour l'équipe choisie 
+  // Récupération de la date de référence du cycle pour l'équipe choisie
   const date_ref = dates_ref[eq-1];
- 
 
-  // Boucle creation des 12 tableaux mensuelles
-  for (var i = 0; i < 12; i++) {
-      // Creation du tableau
-      var planning = document.createElement("table")
+  // Boucle de création des 12 tableaux mensuels
+  for (let i = 0; i < 12; i++) {
+      // Création du tableau
+      let planning = document.createElement("table")
       // Nommage du tableau mois + année
-      row = document.createElement("tr");
-      var entete = document.createElement("th");
-      var enteteTexte = document.createTextNode(mois[i] + " " + an);
+      let row = document.createElement("tr");
+      let entete = document.createElement("th");
+      let enteteTexte = document.createTextNode(mois[i] + " " + an);
       entete.appendChild(enteteTexte);
       entete.colSpan = 7;
       
       row.appendChild(entete);
       planning.appendChild(row);
       row = document.createElement("tr");
-      // Boucle de création des entetes des jours de la semaine
-      for (var x = 0; x < 7; x++){
-          var cell = document.createElement("td");
+      // Boucle de création des entêtes des jours de la semaine
+      for (let x = 0; x < 7; x++){
+          let cell = document.createElement("td");
           cell.className = "jour_semaine";
-          var cellText = document.createTextNode(jour[x]);
+          let cellText = document.createTextNode(jour[x]);
           cell.appendChild(cellText);
           row.appendChild(cell);
       }
       planning.appendChild(row);
       
-      var date_g = new Date(Date.UTC(an, i, 1));
-      var compteur_jour_semaine = 0
-      var jour_semaine_france
+      let date_g = new Date(Date.UTC(an, i, 1));
+      let compteur_jour_semaine = 0
+      let jour_semaine_france
       row = document.createElement("tr");
 
-      // Boucle de creation des jours dans le mois
+      // Boucle de création des jours dans le mois
       do {
-          var cell = document.createElement("td");
+          // Mise en format AAAA-MM-DD du jour à tester
+          let jour_test = date_g.getFullYear() + "-" + twoDigit(1+date_g.getMonth()) + "-" + (twoDigit(date_g.getDate()))
+          // Création de la "cellule" représentant le jour
+          let cell = document.createElement("td");
+          cell.id = jour_test;
+          // Ajout d'un événement
+          cell.addEventListener("click", (event) => {
+              cell.textContent = `${cell.id}`;
+          });
           
           jour_semaine_france = date_g.getDay() - 1
-          if (jour_semaine_france == -1){
+          if (jour_semaine_france === -1){
               jour_semaine_france = 6
           }
-          if (jour_semaine_france == compteur_jour_semaine && date_g.getMonth() == i) {
-              var cellText = document.createTextNode(date_g.getDate());
+          if (jour_semaine_france === compteur_jour_semaine && date_g.getMonth() === i) {
+              let cellText = document.createTextNode(date_g.getDate().toString());
               cell.appendChild(cellText);
-              // Verification du poste du jour (matin,AM,Nuit,HN,repos)
-              var c = Math.round(((date_g - date_ref) / 1000 / 60 / 60 / 24) % 70);
+              // Vérification du poste du jour (matin, AM, Nuit, HN, repos)
+              let c = Math.round(((date_g - date_ref) / 1000 / 60 / 60 / 24) % 70);
               cell.className = cycle[t][c];
-              
-              // Mise en format AAAA-MM-DD du jour à tester
-              jour_test = date_g.getFullYear() + "-" + twoDigit(1+date_g.getMonth()) + "-" + (twoDigit(date_g.getDate()))
-              //Verification si le jour est ferié
+
+              // Vérification si le jour est férié
               if(jour_test in jours_feries){
                 cell.style.borderColor="Black"
               }
-              // Verification si le jour fait partie des vacances scolaires
+              // Vérification si le jour fait partie des vacances scolaires
               if (vacances_scolaires.includes(jour_test)){
                   cell.style.borderColor="Black"
               }
-                              
+
               date_g.setDate(date_g.getDate()+1)
 
           } else{
               cell.className = "v"
           }
-          
+
           row.appendChild(cell);
           compteur_jour_semaine++
-          if (compteur_jour_semaine == 7 && date_g.getMonth() == i) {
+          if (compteur_jour_semaine === 7 && date_g.getMonth() === i) {
               compteur_jour_semaine = 0
               planning.appendChild(row);
               row = document.createElement("tr");
           }
       planning.appendChild(row);
-      }while (!(compteur_jour_semaine == 7 && date_g.getMonth() != i))
+      }while (!(compteur_jour_semaine === 7 && date_g.getMonth() !== i))
   
-  // Création pied de tableau pour compenser les differences de taille des tableaux selon les mois
-  ligne_pied = document.createElement("tr");
-  var cellule_pied = document.createElement("td");
+  // Création pied de tableau pour compenser les différences de taille des tableaux selon les mois
+  let ligne_pied = document.createElement("tr");
+  let cellule_pied = document.createElement("td");
   cellule_pied.className = "foot"
   cellule_pied.colSpan = 7;
   ligne_pied.appendChild(cellule_pied)
@@ -295,17 +302,8 @@ function gen_plan() {
 }
 
 function a_propos(){
-  if (document.getElementById("apropos").hidden){
-    document.getElementById("apropos").hidden = false
-  }
-  else {
-    document.getElementById("apropos").hidden = true
-  }
- 
-
+  document.getElementById("apropos").hidden = !document.getElementById("apropos").hidden;
 }
 
+gen_plan()
 
-setTimeout(() => {
-  gen_plan()
-},"800")
