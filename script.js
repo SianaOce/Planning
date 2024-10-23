@@ -248,10 +248,6 @@ function gen_plan() {
           let jour_test = date_g.getFullYear() + "-" + twoDigit(1+date_g.getMonth()) + "-" + (twoDigit(date_g.getDate()))
           // Création de la "cellule" représentant le jour
           let cell = document.createElement("td");
-          cell.id = jour_test;
-          // Ajout d'un événement
-          cell.addEventListener("click", (event) => {
-              cell.textContent = `${cell.id}`;
           });
           
           jour_semaine_france = date_g.getDay() - 1
